@@ -1,0 +1,15 @@
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/bin/Debug/net7.0/poet-tools-cs
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/bin/Debug/net7.0/poet-tools-cs.deps.json
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/bin/Debug/net7.0/poet-tools-cs.runtimeconfig.json
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/bin/Debug/net7.0/poet-tools-cs.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/bin/Debug/net7.0/poet-tools-cs.pdb
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.csproj.AssemblyReference.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.GeneratedMSBuildEditorConfig.editorconfig
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.AssemblyInfoInputs.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.AssemblyInfo.cs
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.csproj.CoreCompileInputs.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/Debug/net7.0/refint/poet-tools-cs.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.pdb
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.genruntimeconfig.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/Debug/net7.0/ref/poet-tools-cs.dll
