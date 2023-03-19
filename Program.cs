@@ -4,10 +4,19 @@
 
 // NOTES ----------------------------------------------------------------------/
 /*
-
+ * ISSUE: FindRhyme Method Writes to Console Too Many Times Erasing/Hiding Previous Console Messages.
 */
 
-FindRhyme("Yellow");
+// RUN FINDRHYME METHOD: Ask User for a Word ----------------------------------/
+while (true) {
+    Console.Write("Please type the word you want a rhyme for: ");
+    string? inputWord = Console.ReadLine();
+
+    if (inputWord != null) {
+        Console.Clear();
+        FindRhyme(inputWord);
+    }
+}
 
 // METHOD: Find Rhyming Word --------------------------------------------------/
 static void FindRhyme(string word) {
@@ -31,7 +40,7 @@ static void FindRhyme(string word) {
 
     // Print Every Word with the Same Rhyming Syllable
     Console.WriteLine("Here is a list of every possible rhyming word:");
-    
+
     foreach (string pronunciation in pronunciations) {
         string[] terms = pronunciation.Split(" ");
 
