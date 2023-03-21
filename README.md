@@ -2,7 +2,8 @@ This is a C# program that helps users find rhyming words for a given input word.
 
 ## Issues
 
-Currently, the `FindRhyme` method writes to the console too many times, erasing/hiding previous console messages.
+-   Currently, the `FindRhyme` method writes to the console too many times, erasing/hiding previous console messages.
+-   The program only finds traditional rhymes (ending sounds) but does not identify complex rhyming schemes like unconventional rhymes, internal rhymes, or phrase rhymes.
 
 ## Instructions
 
@@ -10,7 +11,7 @@ Currently, the `FindRhyme` method writes to the console too many times, erasing/
 2.  Open the project in your C# IDE of choice.
 3.  Build and run the program.
 4.  When prompted, enter the word you want to find a rhyme for.
-5.  The program will display the rhyming syllable and a list of all the words in the CMU Pronouncing Dictionary that share that same rhyming syllable.
+5.  The program will display a list of all the words in the CMU Pronouncing Dictionary that share that same rhyming syllables.
 
 ## Future Improvements
 
