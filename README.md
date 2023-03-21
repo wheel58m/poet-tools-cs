@@ -1,4 +1,4 @@
-This is a C# program that helps users find rhyming words for a given input word. The program uses the CMU Pronouncing Dictionary to identify the rhyming syllable for the input word, and then finds all the words in the dictionary that share the same rhyming syllable.
+This is a C# program that helps users find rhyming words for a given input word. The program uses the CMU Pronouncing Dictionary to identify the rhyming syllables for the input word, and then finds all the words in the dictionary that share the same rhyming syllables.
 
 ## Issues
 
@@ -20,3 +20,4 @@ Currently, the `FindRhyme` method writes to the console too many times, erasing/
 -   Create a 'Word Counter' method to count the number of words in a line.
 -   Create a 'Get Poem Template' method to generate and display templates for different poem types (Sonnets, Haikus, Limerick, etc.).
 -   Create a 'Define Word' method to return the definition of a given word.
+-   Create a 'Display Pronunciation' Method to print the phonetic guide for a given word.

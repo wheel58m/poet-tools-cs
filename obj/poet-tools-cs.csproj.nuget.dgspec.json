@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/poet-tools-cs.csproj": {}
+    "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/poet-tools-cs.csproj": {}
   },
   "projects": {
-    "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/poet-tools-cs.csproj": {
+    "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/poet-tools-cs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/poet-tools-cs.csproj",
+        "projectUniqueName": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/poet-tools-cs.csproj",
         "projectName": "poet-tools-cs",
-        "projectPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/poet-tools-cs.csproj",
+        "projectPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/poet-tools-cs.csproj",
         "packagesPath": "/Users/wheel58m/.nuget/packages/",
-        "outputPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/poet-tools-cs/obj/",
+        "outputPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/wheel58m/.nuget/NuGet/NuGet.Config"
