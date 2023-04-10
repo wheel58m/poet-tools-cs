@@ -4,6 +4,8 @@
 
 // NOTES ----------------------------------------------------------------------/
 /*
+ * ISSUE: FindRhyme Method does not display a message if the input word is not found in the dictionary.
+ * ISSUE: FindRhyme Method does not display a message if there are no rhymes for the input word.
  * ISSUE: Rhymes are Soley Based on Ending Sounds and Do Not Include Complex Rhymes Like Unconventional or Internal Rhymes.
 */
 
@@ -21,19 +23,17 @@ while (true) {
 
 // METHOD: Continue/Repeat Method ---------------------------------------------/
 static bool Continue(string prompt, bool exit) {
-    char input = ' ';
-
     switch (exit) {
-        case true: // Exit Only
+        // Exit Only ----------------------------------------------------------/
+        case true:
             Console.Write(prompt);
-            input = Console.ReadKey().KeyChar;
+            Console.ReadKey(true); // Accept Any Key Press
             return false;
-        case false: // Continue or Exit
-            bool validOption = false;
-            
-            while (!validOption) {
+        // Continue or Exit ---------------------------------------------------/
+        case false:
+            while (true) {
                 Console.Write(prompt);
-                input = Console.ReadKey().KeyChar;
+                char input = Console.ReadKey().KeyChar;
 
                 if (input == 'y' || input == 'Y') {
                     return true;
@@ -46,46 +46,48 @@ static bool Continue(string prompt, bool exit) {
                     Console.ResetColor();
                 }
             }
-            return false;
     }
 }
 
 // METHOD: Find Rhyming Word --------------------------------------------------/
 static void FindRhyme(string inputWord) {
     inputWord = inputWord.ToUpper();
-    List<string> inputSounds = new List<string>(); // List of Sounds in Given Word
-    int inSoundCount = 0; // Number of Sounds in Given Word
-    List<(string RhymingWord, int RhymeCount)> rhymes = new List<(string, int)>(); // List Storing Rhyming Words in a Tuple with the Rhyming Word and Number of Matching Ending Sounds.
 
+    // Read in the CMU Pronouncing Dictionary ---------------------------------/
     string dictFile = "cmudict-0.7b"; // Save Filename of Phonetic Dictionary
     string[] pronunciations = File.ReadAllLines(dictFile);
 
-    // Find Input Word and Its Sounds in the Phonetic Dictionary
+    // Find Input Word and Its Sounds in the Phonetic Dictionary --------------/
+    List<string> inputSounds = new List<string>(); // List of Sounds in Given Word
+    int inputSoundCount = 0; // Number of Sounds in Given Word
+
     foreach (string pronunciation in pronunciations) {
         if (pronunciation.StartsWith(";;;")) continue; // Skip File Comments
         string[] terms = pronunciation.Split(" ");
 
-        foreach (string term in terms) {
-            if (term == inputWord) {
-                // Add Each Sound After the Matching Word and Whitespace to the Sounds List.
-                for (int i = 2; i < terms.Length; i++) {
-                    inputSounds.Add(terms[i]);
-                    inSoundCount++;
-                }
+        if (terms[0] == inputWord) {
+            inputSoundCount = terms.Length - 2; // Exclude Word & Whitespace
+
+            for (int i = 2; i < terms.Length; i++) {
+                inputSounds.Add(terms[i]); // Add Input Word Sounds to List
             }
+
+            break; // Stop Searching for Input Word
         }
     }
 
-    // Add Words that Rhyme with the Input Word to the Rhymes List
+    // Add Words that Rhyme with the Input Word to the Rhymes List ------------/
+    List<(string RhymingWord, int RhymeCount)> rhymes = new List<(string, int)>(); // List Storing Rhyming Words in a Tuple with the Rhyming Word and Number of Matching Ending Sounds.
+
     foreach (string pronunciation in pronunciations) {
         if (pronunciation.StartsWith(";;;")) continue; // Skip File Comments
 
         string[] terms = pronunciation.Split(" ");
-        int outSoundCount = terms.Length - 2; // Exclude Word & Whitespace
+        int outputSoundCount = terms.Length - 2; // Exclude Word & Whitespace
         string outputWord = terms[0];
         int matchingSoundCount = 0;
 
-        for (int i = 1; i <= inSoundCount && i <= outSoundCount; i++) {
+        for (int i = 1; i <= inputSoundCount && i <= outputSoundCount; i++) {
             string inputSound = inputSounds[^i];
             string outputSound = terms[^i];
 
@@ -101,13 +103,22 @@ static void FindRhyme(string inputWord) {
         }
     }
 
-    // Sort Rhyme List by the Number of Matching Sounds
+    // Sort Rhyme List by the Number of Matching Sounds -----------------------/
     rhymes.Sort((x, y) => y.RhymeCount.CompareTo(x.RhymeCount));
 
-    // Display List of Rhyming Words
+    // Display List of Rhyming Words ------------------------------------------/
     int rhymingWordCount = rhymes.Count();
-    int startIndex = 0; // Index of First Rhyming Word to Display
-    int endIndex = 9; // Index of Last Rhyming Word to Display
+
+    // Set Indexes for Displaying Rhymes
+    int startIndex = 0;
+    int endIndex = 0;
+    // Check if There are Less Than 10 Rhymes
+    if (rhymingWordCount < 10) {
+        endIndex = rhymingWordCount - 1;
+    } else {
+        endIndex = 9;
+    }
+
     bool findingRhymes = true; // Intialize Loop Condition
 
     // Print List of Rhymes

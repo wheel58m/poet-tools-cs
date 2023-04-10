@@ -2,6 +2,8 @@ This is a C# program that helps users find rhyming words for a given input word.
 
 ## Issues
 
+-   FindRhyme Method does not display a message if the input word is not found in the dictionary.
+-   FindRhyme Method does not display a message if there are no rhymes for the input word.
 -   The program only finds traditional rhymes (ending sounds) but does not identify complex rhyming schemes like unconventional rhymes, internal rhymes, or phrase rhymes.
 
 ## Instructions
