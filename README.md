@@ -2,7 +2,6 @@ This is a C# program that helps users find rhyming words for a given input word.
 
 ## Issues
 
--   Currently, the `FindRhyme` method writes to the console too many times, erasing/hiding previous console messages.
 -   The program only finds traditional rhymes (ending sounds) but does not identify complex rhyming schemes like unconventional rhymes, internal rhymes, or phrase rhymes.
 
 ## Instructions
@@ -15,8 +14,8 @@ This is a C# program that helps users find rhyming words for a given input word.
 
 ## Future Improvements
 
--   Address the issue of the `FindRhyme` method writing to the console too many times.
--   Display the top 10 best rhyming words (words with the most rhyming syllables).
+-   ~~Display the top 10 best rhyming words (words with the most rhyming syllables).~~
+-   Create a Continue Method to allow a user to view the next 10 rhymes.
 -   Create a 'Syllable Counter' method to display the number of syllables in a given word.
 -   Create a 'Word Counter' method to count the number of words in a line.
 -   Create a 'Get Poem Template' method to generate and display templates for different poem types (Sonnets, Haikus, Limerick, etc.).

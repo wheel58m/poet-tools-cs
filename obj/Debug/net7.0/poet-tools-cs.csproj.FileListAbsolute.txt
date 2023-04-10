@@ -28,3 +28,18 @@
 /Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.pdb
 /Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.genruntimeconfig.cache
 /Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/obj/Debug/net7.0/ref/poet-tools-cs.dll
+/workspaces/poet-tools-cs/bin/Debug/net7.0/poet-tools-cs
+/workspaces/poet-tools-cs/bin/Debug/net7.0/poet-tools-cs.deps.json
+/workspaces/poet-tools-cs/bin/Debug/net7.0/poet-tools-cs.runtimeconfig.json
+/workspaces/poet-tools-cs/bin/Debug/net7.0/poet-tools-cs.dll
+/workspaces/poet-tools-cs/bin/Debug/net7.0/poet-tools-cs.pdb
+/workspaces/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.csproj.AssemblyReference.cache
+/workspaces/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.AssemblyInfoInputs.cache
+/workspaces/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.AssemblyInfo.cs
+/workspaces/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.csproj.CoreCompileInputs.cache
+/workspaces/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.dll
+/workspaces/poet-tools-cs/obj/Debug/net7.0/refint/poet-tools-cs.dll
+/workspaces/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.pdb
+/workspaces/poet-tools-cs/obj/Debug/net7.0/poet-tools-cs.genruntimeconfig.cache
+/workspaces/poet-tools-cs/obj/Debug/net7.0/ref/poet-tools-cs.dll

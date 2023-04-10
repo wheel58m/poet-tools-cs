@@ -4,7 +4,6 @@
 
 // NOTES ----------------------------------------------------------------------/
 /*
- * ISSUE: FindRhyme Method Writes to Console Too Many Times Erasing/Hiding Previous Console Messages.
  * ISSUE: Rhymes are Soley Based on Ending Sounds and Do Not Include Complex Rhymes Like Unconventional or Internal Rhymes.
 */
 
@@ -73,11 +72,20 @@ static void FindRhyme(string inputWord) {
     // Sort Rhyme List by the Number of Matching Sounds
     rhymes.Sort((x, y) => y.RhymeCount.CompareTo(x.RhymeCount));
 
-    // Print List of Rhymes
+    // Display List of Rhyming Words
     int rhymingWordCount = rhymes.Count();
-    Console.WriteLine($"Here is a list of {rhymingWordCount} possible rhyming word:");
+    int startIndex = 0; // Index of First Rhyming Word to Display
+    int endIndex = 9; // Index of Last Rhyming Word to Display
+    bool findingRhymes = true;
 
-    foreach ((string RhymingWord, int RhymeCount) in rhymes) {
-        Console.WriteLine($"{RhymingWord} rhymes with {inputWord} on {RhymeCount} sounds.");
+    // Print List of Rhymes
+    while (findingRhymes) {
+        Console.WriteLine($"Here is a list of {rhymingWordCount} possible rhyming word (showing {startIndex + 1} through {endIndex + 1}):");
+
+        for (int i = startIndex; i < endIndex; i++) {
+            (string, int) rhyme = rhymes[i];
+            Console.WriteLine($"> {rhyme.Item1} rhymes with {inputWord} on {rhyme.Item2} sounds.");
+        }
+        findingRhymes = false;
     }
 }
