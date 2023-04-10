@@ -9,12 +9,44 @@
 
 // RUN FINDRHYME METHOD: Ask User for a Word ----------------------------------/
 while (true) {
+    Console.Clear();
     Console.Write("Please type the word you want a rhyme for: ");
     string? inputWord = Console.ReadLine();
 
     if (inputWord != null) {
         Console.Clear();
         FindRhyme(inputWord);
+    }
+}
+
+// METHOD: Continue/Repeat Method ---------------------------------------------/
+static bool Continue(string prompt, bool exit) {
+    char input = ' ';
+
+    switch (exit) {
+        case true: // Exit Only
+            Console.Write(prompt);
+            input = Console.ReadKey().KeyChar;
+            return false;
+        case false: // Continue or Exit
+            bool validOption = false;
+            
+            while (!validOption) {
+                Console.Write(prompt);
+                input = Console.ReadKey().KeyChar;
+
+                if (input == 'y' || input == 'Y') {
+                    return true;
+                } else if (input == 'n' || input == 'N') {
+                    return false;
+                } else {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("\nInvalid Option. Please Try Again. ");
+                    Console.ResetColor();
+                }
+            }
+            return false;
     }
 }
 
@@ -76,16 +108,31 @@ static void FindRhyme(string inputWord) {
     int rhymingWordCount = rhymes.Count();
     int startIndex = 0; // Index of First Rhyming Word to Display
     int endIndex = 9; // Index of Last Rhyming Word to Display
-    bool findingRhymes = true;
+    bool findingRhymes = true; // Intialize Loop Condition
 
     // Print List of Rhymes
     while (findingRhymes) {
+        Console.Clear();
         Console.WriteLine($"Here is a list of {rhymingWordCount} possible rhyming word (showing {startIndex + 1} through {endIndex + 1}):");
 
-        for (int i = startIndex; i < endIndex; i++) {
+        for (int i = startIndex; i <= endIndex; i++) {
             (string, int) rhyme = rhymes[i];
             Console.WriteLine($"> {rhyme.Item1} rhymes with {inputWord} on {rhyme.Item2} sounds.");
         }
-        findingRhymes = false;
+
+        // Ask User if They Want to See More Rhymes
+        if (endIndex < rhymingWordCount - 1) {
+            findingRhymes = Continue("\nWould you like to see more rhymes? (y/n): ", false);
+
+            // Update Indexes
+            startIndex += 10;
+            if (endIndex + 10 < rhymingWordCount - 1) {
+                endIndex += 10;
+            } else {
+                endIndex = rhymingWordCount - 1;
+            }
+        } else {
+            findingRhymes = Continue("\nPress any key to exit: ", true);
+        }
     }
 }
