@@ -9,19 +9,17 @@
  * ISSUE: Rhymes are Soley Based on Ending Sounds and Do Not Include Complex Rhymes Like Unconventional or Internal Rhymes.
 */
 
-// RUN FINDRHYME METHOD: Ask User for a Word ----------------------------------/
+// MAIN -----------------------------------------------------------------------/
+// Test FindRhyme Method
 while (true) {
     Console.Clear();
-    Console.Write("Please type the word you want a rhyme for: ");
-    string? inputWord = Console.ReadLine();
-
-    if (inputWord != null) {
-        Console.Clear();
-        FindRhyme(inputWord);
-    }
+    Console.Write("Enter a word to find rhymes: ");
+    string inputWord = Console.ReadLine();
+    FindRhyme(inputWord);
+    if (!Continue("\nWould you like to find another rhyme? (y/n): ", false)) break;
 }
 
-// METHOD: Continue/Repeat Method ---------------------------------------------/
+// METHOD: CONTINUE OR EXIT ---------------------------------------------------/
 static bool Continue(string prompt, bool exit) {
     switch (exit) {
         // Exit Only ----------------------------------------------------------/
@@ -49,47 +47,65 @@ static bool Continue(string prompt, bool exit) {
     }
 }
 
+// METHOD: LOAD PRONUNCIATION DICTIONARY --------------------------------------/
+// Load Pronunciation Dictionary File into a Dictionary Variable that can be used throughout the entire program.
+static Dictionary<string, Tuple<List<string>, int>> LoadPronunciationDictionary() {
+    // Read in the CMU Pronouncing Dictionary ---------------------------------/
+    string dictFile = "cmudict-0.7b"; // Store Filename of Phonetic Dictionary
+    string[] pronunciations = File.ReadAllLines(dictFile);
+
+    // Create Dictionary to Store Pronunciations ------------------------------/
+    Dictionary<string, Tuple<List<string>, int>> pronunciationDictionary = new Dictionary<string, Tuple<List<string>, int>>();
+
+    // Loop Through Each Pronunciation and Add to Dictionary ------------------/
+    foreach (string pronunciation in pronunciations) {
+        if (pronunciation.StartsWith(";;;")) continue; // Skip File Comments
+
+        string[] terms = pronunciation.Split(" "); // Split Pronunciation into Terms
+        string word = terms[0]; // Store Word
+        List<string> sounds = new List<string>(); // Store Sounds
+        int soundCount = terms.Length - 2; // Store Number of Sounds
+
+        // Loop Through Each Sound and Add to List ----------------------------/
+        for (int i = 2; i < terms.Length; i++) {
+            sounds.Add(terms[i]);
+        }
+
+        // Add Word and Sounds to Dictionary ----------------------------------/
+        pronunciationDictionary.Add(word, new Tuple<List<string>, int>(sounds, soundCount));
+    }
+
+    return pronunciationDictionary;
+}
+
 // METHOD: Find Rhyming Word --------------------------------------------------/
 static void FindRhyme(string inputWord) {
     inputWord = inputWord.ToUpper();
 
     // Read in the CMU Pronouncing Dictionary ---------------------------------/
-    string dictFile = "cmudict-0.7b"; // Save Filename of Phonetic Dictionary
-    string[] pronunciations = File.ReadAllLines(dictFile);
+    Dictionary<string, Tuple<List<string>, int>> pronunciationDictionary = LoadPronunciationDictionary();
 
     // Find Input Word and Its Sounds in the Phonetic Dictionary --------------/
     List<string> inputSounds = new List<string>(); // List of Sounds in Given Word
     int inputSoundCount = 0; // Number of Sounds in Given Word
 
-    foreach (string pronunciation in pronunciations) {
-        if (pronunciation.StartsWith(";;;")) continue; // Skip File Comments
-        string[] terms = pronunciation.Split(" ");
-
-        if (terms[0] == inputWord) {
-            inputSoundCount = terms.Length - 2; // Exclude Word & Whitespace
-
-            for (int i = 2; i < terms.Length; i++) {
-                inputSounds.Add(terms[i]); // Add Input Word Sounds to List
-            }
-
-            break; // Stop Searching for Input Word
-        }
+    if (pronunciationDictionary.ContainsKey(inputWord)) {
+        inputSounds = pronunciationDictionary[inputWord].Item1;
+        inputSoundCount = pronunciationDictionary[inputWord].Item2;
     }
 
     // Add Words that Rhyme with the Input Word to the Rhymes List ------------/
     List<(string RhymingWord, int RhymeCount)> rhymes = new List<(string, int)>(); // List Storing Rhyming Words in a Tuple with the Rhyming Word and Number of Matching Ending Sounds.
 
-    foreach (string pronunciation in pronunciations) {
-        if (pronunciation.StartsWith(";;;")) continue; // Skip File Comments
-
-        string[] terms = pronunciation.Split(" ");
-        int outputSoundCount = terms.Length - 2; // Exclude Word & Whitespace
-        string outputWord = terms[0];
+    foreach (KeyValuePair<string, Tuple<List<string>, int>> pronunciation in pronunciationDictionary) {
+        string outputWord = pronunciation.Key; // Store Word
+        List<string> outputSounds = pronunciation.Value.Item1; // Store Sounds
+        int outputSoundCount = pronunciation.Value.Item2; // Store Number of Sounds
         int matchingSoundCount = 0;
 
         for (int i = 1; i <= inputSoundCount && i <= outputSoundCount; i++) {
             string inputSound = inputSounds[^i];
-            string outputSound = terms[^i];
+            string outputSound = outputSounds[^i];
 
             if (inputSound == outputSound) {
                 matchingSoundCount++;
