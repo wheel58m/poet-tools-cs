@@ -59,6 +59,25 @@ while (true) {
             }
             break;
         case '2':
+            while (true) {
+                Console.Clear();
+                Console.Write("Enter a word to lookup pronunciation: ");
+                string inputWord = Console.ReadLine();
+                string[] pronunciationArray = FindPronunciation(inputWord);
+                
+                // Display Pronunciation
+                Console.Write($"{inputWord.ToUpper()}:");
+                foreach (string pronunciation in pronunciationArray) {
+                    Console.Write($" {pronunciation}");
+                }
+
+                Console.WriteLine();
+                if (ContinueOrExit("\nWould you like to lookup another word? (y/n) ", false)) {
+                    continue;
+                } else {
+                    break;
+                }
+            }
             break;
         case '3':
             break;
@@ -83,12 +102,14 @@ static bool ContinueOrExit(string prompt, bool exit) {
     switch (exit) {
         // Exit Only ----------------------------------------------------------/
         case true:
+            Console.WriteLine();
             Console.Write(prompt);
             Console.ReadKey(); // Accept Any Key Press
             return false;
         // Continue or Exit ---------------------------------------------------/
         case false:
             while (true) {
+                Console.WriteLine();
                 Console.Write(prompt);
                 char input = Console.ReadKey().KeyChar;
 
@@ -218,4 +239,18 @@ void FindRhyme(string inputWord) {
             findingRhymes = ContinueOrExit("\nPress any key to exit: ", true);
         }
     }
+}
+
+// METHOD: FIND PRONUNCIATION -------------------------------------------------/
+string[] FindPronunciation(string inputWord) {
+    inputWord = inputWord.ToUpper(); // Convert Word to Uppercase for Case Matching in Dictionary
+
+    // Find Input Word and Its Sounds in the Phonetic Dictionary --------------/
+    string[] pronunciation = new string[] { }; // Array to Store Pronunciation
+
+    if (pronunciationDictionary.ContainsKey(inputWord)) {
+        pronunciation = pronunciationDictionary[inputWord].Item1.ToArray();
+    }
+
+    return pronunciation;
 }
