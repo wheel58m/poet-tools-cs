@@ -4,28 +4,87 @@
 
 // NOTES ----------------------------------------------------------------------/
 /*
+ * TODO: Break ContinueOrExit Into Two Methods.
  * ISSUE: FindRhyme Method does not display a message if the input word is not found in the dictionary.
  * ISSUE: FindRhyme Method does not display a message if there are no rhymes for the input word.
  * ISSUE: Rhymes are Soley Based on Ending Sounds and Do Not Include Complex Rhymes Like Unconventional or Internal Rhymes.
 */
 
 // MAIN -----------------------------------------------------------------------/
+Dictionary<string, Tuple<List<string>, int>> pronunciationDictionary = LoadPronunciationDictionary();
+bool error = false; // Store Error Status
+string msg = ""; // Store Any Error or Success Messages
+
 // Test FindRhyme Method
 while (true) {
     Console.Clear();
-    Console.Write("Enter a word to find rhymes: ");
-    string inputWord = Console.ReadLine();
-    FindRhyme(inputWord);
-    if (!Continue("\nWould you like to find another rhyme? (y/n): ", false)) break;
+    Console.WriteLine("Please select a poetry tool below: ");
+    if (error) {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(msg);
+        Console.ResetColor();
+        error = false;
+        msg = "";
+    } else {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(msg);
+        Console.ResetColor();
+        msg = "";
+    }
+    Console.WriteLine(msg); // Display Any Error or Success Messages
+    Console.WriteLine("1. Find Rhyming Words");
+    Console.WriteLine("2. Lookup a Word's Pronunciation");
+    Console.WriteLine("3. Lookup a Word's Definition");
+    Console.WriteLine("4. Select a Poetry Template");
+    Console.WriteLine("5. Count Syllables in a Word or Phrase");
+    Console.WriteLine("6. Count Words in a Phrase");
+    Console.WriteLine("7. Exit Program");
+    Console.WriteLine();
+    Console.Write("Enter a number to select a tool: ");
+    char input = Console.ReadKey().KeyChar;
+
+    switch (input) {
+        case '1':
+            while (true) {
+                Console.Clear();
+                Console.Write("Enter a word to find rhymes: ");
+                string inputWord = Console.ReadLine();
+                FindRhyme(inputWord);
+
+                if (ContinueOrExit("\nWould you like to find another rhyme? (y/n) ", false)) {
+                    continue;
+                } else {
+                    break;
+                }
+            }
+            break;
+        case '2':
+            break;
+        case '3':
+            break;
+        case '4':
+            break;
+        case '5':
+            break;
+        case '6':
+            break;
+        case '7':
+            Console.Clear();
+            return;
+        default:
+            error = true;
+            msg = "Invalid Option. Please Try Again. ";
+            break;
+    }
 }
 
 // METHOD: CONTINUE OR EXIT ---------------------------------------------------/
-static bool Continue(string prompt, bool exit) {
+static bool ContinueOrExit(string prompt, bool exit) {
     switch (exit) {
         // Exit Only ----------------------------------------------------------/
         case true:
             Console.Write(prompt);
-            Console.ReadKey(true); // Accept Any Key Press
+            Console.ReadKey(); // Accept Any Key Press
             return false;
         // Continue or Exit ---------------------------------------------------/
         case false:
@@ -79,11 +138,8 @@ static Dictionary<string, Tuple<List<string>, int>> LoadPronunciationDictionary(
 }
 
 // METHOD: Find Rhyming Word --------------------------------------------------/
-static void FindRhyme(string inputWord) {
+void FindRhyme(string inputWord) {
     inputWord = inputWord.ToUpper();
-
-    // Read in the CMU Pronouncing Dictionary ---------------------------------/
-    Dictionary<string, Tuple<List<string>, int>> pronunciationDictionary = LoadPronunciationDictionary();
 
     // Find Input Word and Its Sounds in the Phonetic Dictionary --------------/
     List<string> inputSounds = new List<string>(); // List of Sounds in Given Word
@@ -149,7 +205,7 @@ static void FindRhyme(string inputWord) {
 
         // Ask User if They Want to See More Rhymes
         if (endIndex < rhymingWordCount - 1) {
-            findingRhymes = Continue("\nWould you like to see more rhymes? (y/n): ", false);
+            findingRhymes = ContinueOrExit("\nWould you like to see more rhymes? (y/n): ", false);
 
             // Update Indexes
             startIndex += 10;
@@ -159,7 +215,7 @@ static void FindRhyme(string inputWord) {
                 endIndex = rhymingWordCount - 1;
             }
         } else {
-            findingRhymes = Continue("\nPress any key to exit: ", true);
+            findingRhymes = ContinueOrExit("\nPress any key to exit: ", true);
         }
     }
 }
