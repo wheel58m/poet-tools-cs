@@ -1,4 +1,4 @@
-This is a C# program that helps users find rhyming words for a given input word. The program uses the CMU Pronouncing Dictionary to identify the rhyming syllables for the input word, and then finds all the words in the dictionary that share the same rhyming syllables.
+This is a C# program that provides tools to help users write poetry. The program uses the CMU Pronouncing Dictionary to identify rhyming words or load the pronunciation guide for any given word.
 
 ## Issues
 
@@ -6,13 +6,11 @@ This is a C# program that helps users find rhyming words for a given input word.
 -   FindRhyme Method does not display a message if there are no rhymes for the input word.
 -   The program only finds traditional rhymes (ending sounds) but does not identify complex rhyming schemes like unconventional rhymes, internal rhymes, or phrase rhymes.
 
-## Instructions
+## Instructions & Usage
+To use this program, build and run the program in your C# IDE of choice. From there a menu will load, input the number corresponding to the tool you would like to use. Currently there are two tools available.
 
-1.  Clone the repository.
-2.  Open the project in your C# IDE of choice.
-3.  Build and run the program.
-4.  When prompted, enter the word you want to find a rhyme for.
-5.  The program will display a list of all the words in the CMU Pronouncing Dictionary that share that same rhyming syllables.
+1.  Find Rhyming Words Tool: Allows you to enter a word and find other words with similar sound patterns.
+2.  Display Pronunciation Tool: Loads the sound pattern of a given word.
 
 ## Future Improvements
 
@@ -22,4 +20,7 @@ This is a C# program that helps users find rhyming words for a given input word.
 -   Create a 'Word Counter' method to count the number of words in a line.
 -   Create a 'Get Poem Template' method to generate and display templates for different poem types (Sonnets, Haikus, Limerick, etc.).
 -   Create a 'Define Word' method to return the definition of a given word.
--   Create a 'Display Pronunciation' Method to print the phonetic guide for a given word.
+-   ~~Create a 'Display Pronunciation' Method to print the phonetic guide for a given word.~~
+
+## Attributions
+-   CMU Pronouncing Dictionary
