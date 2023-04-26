@@ -80,6 +80,22 @@ while (true) {
             }
             break;
         case '3':
+            while (true) {
+                Console.Clear();
+                Console.Write("Enter a word to lookup definition: ");
+                string inputWord = Console.ReadLine();
+                string definition = LookupDefinition(inputWord);
+
+                // Display Definition
+                Console.WriteLine($"{inputWord} - {definition}");
+
+                Console.WriteLine();
+                if (ContinueOrExit("\nWould you like to lookup another word? (y/n) ", false)) {
+                    continue;
+                } else {
+                    break;
+                }
+            }
             break;
         case '4':
             break;
@@ -131,7 +147,7 @@ static bool ContinueOrExit(string prompt, bool exit) {
 // Load Pronunciation Dictionary File into a Dictionary Variable that can be used throughout the entire program.
 static Dictionary<string, Tuple<List<string>, int>> LoadPronunciationDictionary() {
     // Read in the CMU Pronouncing Dictionary ---------------------------------/
-    string dictFile = "cmudict-0.7b"; // Store Filename of Phonetic Dictionary
+    string dictFile = "pronunciations.7b"; // Store Filename of Phonetic Dictionary
     string[] pronunciations = File.ReadAllLines(dictFile);
 
     // Create Dictionary to Store Pronunciations ------------------------------/
@@ -253,4 +269,25 @@ string[] FindPronunciation(string inputWord) {
     }
 
     return pronunciation;
+}
+
+// METHOD: LOOKUP DEFINITION --------------------------------------------------/
+string LookupDefinition(string inputWord) {
+    string dictFile = "dictionary.txt";
+    string definition = "";
+
+    // Search Dictionary for Word ---------------------------------------------/
+    string[] dictionary = File.ReadAllLines(dictFile);
+
+    foreach (string line in dictionary) {
+        string[] terms = line.Split(" ");
+        string word = terms[0];
+
+        if (word == inputWord) {
+            definition = line;
+            break;
+        }
+    }
+
+    return definition;
 }
