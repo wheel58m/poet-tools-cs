@@ -44,6 +44,7 @@ while (true) {
     char input = Console.ReadKey().KeyChar;
 
     switch (input) {
+        // Find Rhyming Words -------------------------------------------------/
         case '1':
             while (true) {
                 Console.Clear();
@@ -58,6 +59,7 @@ while (true) {
                 }
             }
             break;
+        // Lookup a Word's Pronunciation --------------------------------------/
         case '2':
             while (true) {
                 Console.Clear();
@@ -79,6 +81,7 @@ while (true) {
                 }
             }
             break;
+        // Lookup a Word's Definition -----------------------------------------/
         case '3':
             while (true) {
                 Console.Clear();
@@ -89,7 +92,6 @@ while (true) {
                 // Display Definition
                 Console.WriteLine($"{inputWord} - {definition}");
 
-                Console.WriteLine();
                 if (ContinueOrExit("\nWould you like to lookup another word? (y/n) ", false)) {
                     continue;
                 } else {
@@ -99,9 +101,37 @@ while (true) {
             break;
         case '4':
             break;
+        // Count Syllables in a Word or Phrase --------------------------------/
         case '5':
+            while (true) {
+                Console.Clear();
+                Console.Write("Enter a word or phrase to count syllables: ");
+                string inputPhrase = Console.ReadLine();
+                int syllableCount = SyllableCounter(inputPhrase);
+                Console.WriteLine($"There are {syllableCount} syllables in the phrase \"{inputPhrase}\".");
+
+                if (ContinueOrExit("\nWould you like to count another phrase? (y/n) ", false)) {
+                    continue;
+                } else {
+                    break;
+                }
+            }
             break;
+        // Count Words in a Phrase --------------------------------------------/
         case '6':
+            while (true) {
+                Console.Clear();
+                Console.Write("Enter a phrase to count words: ");
+                string inputPhrase = Console.ReadLine();
+                int wordCount = WordCounter(inputPhrase);
+                Console.WriteLine($"There are {wordCount} words in the phrase \"{inputPhrase}\".");
+
+                if (ContinueOrExit("\nWould you like to count another phrase? (y/n) ", false)) {
+                    continue;
+                } else {
+                    break;
+                }
+            }
             break;
         case '7':
             Console.Clear();
@@ -147,7 +177,7 @@ static bool ContinueOrExit(string prompt, bool exit) {
 // Load Pronunciation Dictionary File into a Dictionary Variable that can be used throughout the entire program.
 static Dictionary<string, Tuple<List<string>, int>> LoadPronunciationDictionary() {
     // Read in the CMU Pronouncing Dictionary ---------------------------------/
-    string dictFile = "pronunciations.7b"; // Store Filename of Phonetic Dictionary
+    string dictFile = "pronunciations.txt"; // Store Filename of Phonetic Dictionary
     string[] pronunciations = File.ReadAllLines(dictFile);
 
     // Create Dictionary to Store Pronunciations ------------------------------/
@@ -290,4 +320,39 @@ string LookupDefinition(string inputWord) {
     }
 
     return definition;
+}
+
+// METHOD: WORD COUNTER -------------------------------------------------------/
+int WordCounter(string input) {
+    int wordCount = 0;
+
+    // Count Words in Input ---------------------------------------------------/
+    string[] words = input.Split(" ");
+
+    foreach (string word in words) {
+        if (word != "") {
+            wordCount++;
+        }
+    }
+
+    return wordCount;
+}
+
+// METHOD: SYLLABLE COUNTER ---------------------------------------------------/
+int SyllableCounter(string input) {
+    int syllableCount = 0;
+
+    // Count Syllables in Input -----------------------------------------------/
+    string[] words = input.Split(" ");
+
+    foreach (string word in words) {
+        if (word != "") {
+            // Count Syllables in Word ----------------------------------------/
+            string[] wordSounds = FindPronunciation(word);
+
+            syllableCount += wordSounds.Count();
+        }
+    }
+
+    return syllableCount;
 }
