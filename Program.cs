@@ -4,10 +4,10 @@
 
 // NOTES ----------------------------------------------------------------------/
 /*
- * TODO: Break ContinueOrExit Into Two Methods.
  * ISSUE: FindRhyme Method does not display a message if the input word is not found in the dictionary.
  * ISSUE: FindRhyme Method does not display a message if there are no rhymes for the input word.
  * ISSUE: Rhymes are Soley Based on Ending Sounds and Do Not Include Complex Rhymes Like Unconventional or Internal Rhymes.
+ * ISSUE: Syllable Counter returns the number of sounds or phones in a word, not the number of syllables.
 */
 
 // MAIN -----------------------------------------------------------------------/
@@ -15,10 +15,12 @@ Dictionary<string, Tuple<List<string>, int>> pronunciationDictionary = LoadPronu
 bool error = false; // Store Error Status
 string msg = ""; // Store Any Error or Success Messages
 
-// Test FindRhyme Method
+// Display Menu ---------------------------------------------------------------/
 while (true) {
     Console.Clear();
     Console.WriteLine("Please select a poetry tool below: ");
+
+    // Display Any Error or Success Messages ----------------------------------/
     if (error) {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(msg);
@@ -31,7 +33,8 @@ while (true) {
         Console.ResetColor();
         msg = "";
     }
-    Console.WriteLine(msg); // Display Any Error or Success Messages
+
+    // Display Menu Options ---------------------------------------------------/
     Console.WriteLine("1. Find Rhyming Words");
     Console.WriteLine("2. Lookup a Word's Pronunciation");
     Console.WriteLine("3. Lookup a Word's Definition");
@@ -47,12 +50,16 @@ while (true) {
         // Find Rhyming Words -------------------------------------------------/
         case '1':
             while (true) {
+                // Ask User for Input Word
                 Console.Clear();
                 Console.Write("Enter a word to find rhymes: ");
                 string inputWord = Console.ReadLine();
+
+                // Find & Display Rhymes
                 FindRhyme(inputWord);
 
-                if (ContinueOrExit("\nWould you like to find another rhyme? (y/n) ", false)) {
+                // Prompt User to Find Another Rhyme or Exit
+                if (ContinuePrompt("Would you like to find another rhyme? (y/n) ", true)) {
                     continue;
                 } else {
                     break;
@@ -62,9 +69,12 @@ while (true) {
         // Lookup a Word's Pronunciation --------------------------------------/
         case '2':
             while (true) {
+                // Ask User for Input Word
                 Console.Clear();
                 Console.Write("Enter a word to lookup pronunciation: ");
                 string inputWord = Console.ReadLine();
+
+                // Find Pronunciation
                 string[] pronunciationArray = FindPronunciation(inputWord);
                 
                 // Display Pronunciation
@@ -72,9 +82,11 @@ while (true) {
                 foreach (string pronunciation in pronunciationArray) {
                     Console.Write($" {pronunciation}");
                 }
-
                 Console.WriteLine();
-                if (ContinueOrExit("\nWould you like to lookup another word? (y/n) ", false)) {
+                Console.WriteLine();
+
+                // Prompt User to Lookup Another Word or Exit
+                if (ContinuePrompt("Would you like to lookup another word? (y/n) ", false)) {
                     continue;
                 } else {
                     break;
@@ -84,15 +96,20 @@ while (true) {
         // Lookup a Word's Definition -----------------------------------------/
         case '3':
             while (true) {
+                // Ask User for Input Word
                 Console.Clear();
                 Console.Write("Enter a word to lookup definition: ");
                 string inputWord = Console.ReadLine();
+
+                // Find Definition
                 string definition = LookupDefinition(inputWord);
 
                 // Display Definition
                 Console.WriteLine($"{inputWord} - {definition}");
+                Console.WriteLine();
 
-                if (ContinueOrExit("\nWould you like to lookup another word? (y/n) ", false)) {
+                // Prompt User to Lookup Another Word or Exit
+                if (ContinuePrompt("Would you like to lookup another word? (y/n) ", false)) {
                     continue;
                 } else {
                     break;
@@ -104,13 +121,20 @@ while (true) {
         // Count Syllables in a Word or Phrase --------------------------------/
         case '5':
             while (true) {
+                // Ask User for Input Word or Phrase
                 Console.Clear();
                 Console.Write("Enter a word or phrase to count syllables: ");
                 string inputPhrase = Console.ReadLine();
-                int syllableCount = SyllableCounter(inputPhrase);
-                Console.WriteLine($"There are {syllableCount} syllables in the phrase \"{inputPhrase}\".");
 
-                if (ContinueOrExit("\nWould you like to count another phrase? (y/n) ", false)) {
+                // Count Syllables
+                int syllableCount = SyllableCounter(inputPhrase);
+
+                // Display Syllable Count
+                Console.WriteLine($"There are {syllableCount} syllables in the phrase \"{inputPhrase}\".");
+                Console.WriteLine();
+
+                // Prompt User to Count Another Word/Phrase or Exit
+                if (ContinuePrompt("Would you like to count syllables in another phrase? (y/n) ", false)) {
                     continue;
                 } else {
                     break;
@@ -120,22 +144,31 @@ while (true) {
         // Count Words in a Phrase --------------------------------------------/
         case '6':
             while (true) {
+                // Ask User for Input Phrase
                 Console.Clear();
                 Console.Write("Enter a phrase to count words: ");
                 string inputPhrase = Console.ReadLine();
-                int wordCount = WordCounter(inputPhrase);
-                Console.WriteLine($"There are {wordCount} words in the phrase \"{inputPhrase}\".");
 
-                if (ContinueOrExit("\nWould you like to count another phrase? (y/n) ", false)) {
+                // Count Words
+                int wordCount = WordCounter(inputPhrase);
+
+                // Display Word Count
+                Console.WriteLine($"There are {wordCount} words in the phrase \"{inputPhrase}\"");
+                Console.WriteLine();
+
+                // Prompt User to Count Another Phrase or Exit
+                if (ContinuePrompt("Would you like to count words in another phrase? (y/n) ", false)) {
                     continue;
                 } else {
                     break;
                 }
             }
             break;
+        // Exit Program -------------------------------------------------------/
         case '7':
             Console.Clear();
             return;
+        // Invalid Option -----------------------------------------------------/
         default:
             error = true;
             msg = "Invalid Option. Please Try Again. ";
@@ -143,34 +176,44 @@ while (true) {
     }
 }
 
-// METHOD: CONTINUE OR EXIT ---------------------------------------------------/
-static bool ContinueOrExit(string prompt, bool exit) {
-    switch (exit) {
-        // Exit Only ----------------------------------------------------------/
-        case true:
-            Console.WriteLine();
-            Console.Write(prompt);
-            Console.ReadKey(); // Accept Any Key Press
-            return false;
-        // Continue or Exit ---------------------------------------------------/
-        case false:
-            while (true) {
-                Console.WriteLine();
-                Console.Write(prompt);
-                char input = Console.ReadKey().KeyChar;
-
-                if (input == 'y' || input == 'Y') {
-                    return true;
-                } else if (input == 'n' || input == 'N') {
-                    return false;
-                } else {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("\nInvalid Option. Please Try Again. ");
-                    Console.ResetColor();
-                }
-            }
+// METHOD: CONTINUE PROMPT ----------------------------------------------------/
+static bool ContinuePrompt(string prompt, bool clear) {
+    // Clear Console
+    if (clear) {
+        Console.Clear();
     }
+
+    while (true) {
+        // Display Prompt
+        Console.Write(prompt);
+        char input = Console.ReadKey().KeyChar;
+
+        if (input == 'y' || input == 'Y') {
+            return true;
+        } else if (input == 'n' || input == 'N') {
+            return false;
+        } else {
+            // Display Error Message
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Invalid Option. Please Try Again. ");
+            Console.ResetColor();
+            continue;
+        }
+    }
+}
+
+// METHOD: EXIT PROMPT --------------------------------------------------------/
+static bool ExitPrompt(string prompt, bool clear) {
+    // Clear Console
+    if (clear) {
+        Console.Clear();
+    }
+
+    // Display Prompt
+    Console.Write(prompt);
+    Console.ReadKey(true); // Accept Any Key Press
+    return true;
 }
 
 // METHOD: LOAD PRONUNCIATION DICTIONARY --------------------------------------/
@@ -204,7 +247,7 @@ static Dictionary<string, Tuple<List<string>, int>> LoadPronunciationDictionary(
     return pronunciationDictionary;
 }
 
-// METHOD: Find Rhyming Word --------------------------------------------------/
+// METHOD: FIND RHYME ---------------------------------------------------------/
 void FindRhyme(string inputWord) {
     inputWord = inputWord.ToUpper();
 
@@ -272,7 +315,7 @@ void FindRhyme(string inputWord) {
 
         // Ask User if They Want to See More Rhymes
         if (endIndex < rhymingWordCount - 1) {
-            findingRhymes = ContinueOrExit("\nWould you like to see more rhymes? (y/n): ", false);
+            findingRhymes = ContinuePrompt("\nWould you like to see more rhymes? (y/n): ", false);
 
             // Update Indexes
             startIndex += 10;
@@ -282,7 +325,7 @@ void FindRhyme(string inputWord) {
                 endIndex = rhymingWordCount - 1;
             }
         } else {
-            findingRhymes = ContinueOrExit("\nPress any key to exit: ", true);
+            findingRhymes = !ExitPrompt("\nPress any key to exit: ", false);
         }
     }
 }
