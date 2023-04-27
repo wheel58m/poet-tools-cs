@@ -78,10 +78,12 @@ while (true) {
                 string[] pronunciationArray = FindPronunciation(inputWord);
                 
                 // Display Pronunciation
+                Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write($"{inputWord.ToUpper()}:");
                 foreach (string pronunciation in pronunciationArray) {
                     Console.Write($" {pronunciation}");
                 }
+                Console.ResetColor();
                 Console.WriteLine();
                 Console.WriteLine();
 
@@ -105,7 +107,9 @@ while (true) {
                 string definition = LookupDefinition(inputWord);
 
                 // Display Definition
+                Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine($"{inputWord} - {definition}");
+                Console.ResetColor();
                 Console.WriteLine();
 
                 // Prompt User to Lookup Another Word or Exit
@@ -130,7 +134,9 @@ while (true) {
                 int syllableCount = SyllableCounter(inputPhrase);
 
                 // Display Syllable Count
+                Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine($"There are {syllableCount} syllables in the phrase \"{inputPhrase}\".");
+                Console.ResetColor();
                 Console.WriteLine();
 
                 // Prompt User to Count Another Word/Phrase or Exit
@@ -153,7 +159,9 @@ while (true) {
                 int wordCount = WordCounter(inputPhrase);
 
                 // Display Word Count
+                Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine($"There are {wordCount} words in the phrase \"{inputPhrase}\"");
+                Console.ResetColor();
                 Console.WriteLine();
 
                 // Prompt User to Count Another Phrase or Exit
@@ -310,7 +318,9 @@ void FindRhyme(string inputWord) {
 
         for (int i = startIndex; i <= endIndex; i++) {
             (string, int) rhyme = rhymes[i];
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine($"> {rhyme.Item1} rhymes with {inputWord} on {rhyme.Item2} sounds.");
+            Console.ResetColor();
         }
 
         // Ask User if They Want to See More Rhymes
