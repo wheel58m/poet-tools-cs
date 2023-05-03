@@ -7,7 +7,6 @@
  * ISSUE: FindRhyme Method does not display a message if the input word is not found in the dictionary.
  * ISSUE: FindRhyme Method does not display a message if there are no rhymes for the input word.
  * ISSUE: Rhymes are Soley Based on Ending Sounds and Do Not Include Complex Rhymes Like Unconventional or Internal Rhymes.
- * ISSUE: Syllable Counter returns the number of sounds or phones in a word, not the number of syllables.
 */
 
 // MAIN -----------------------------------------------------------------------/
@@ -394,17 +393,37 @@ int WordCounter(string input) {
 // METHOD: SYLLABLE COUNTER ---------------------------------------------------/
 int SyllableCounter(string input) {
     int syllableCount = 0;
+    string[] words = input.Split(" "); // Split Input into Words
 
-    // Count Syllables in Input -----------------------------------------------/
-    string[] words = input.Split(" ");
-
+    // Count Syllables in Each Word -------------------------------------------/
     foreach (string word in words) {
-        if (word != "") {
-            // Count Syllables in Word ----------------------------------------/
-            string[] wordSounds = FindPronunciation(word);
+        int wordSyllables = 0;
+        bool lastWasVowel = false;
 
-            syllableCount += wordSounds.Count();
+        foreach (char c in word) {
+            // Check if Character is a Vowel
+            bool isVowel = "aeiouy".Contains(c);
+
+            // If Character is a Vowel and the Last Character Was Not a Vowel, Add a Syllable
+            if (isVowel && !lastWasVowel) {
+                wordSyllables++;
+            }
+
+            lastWasVowel = isVowel;
         }
+
+        // Check for Silent "e" at the End of the Word
+        if (word.EndsWith("e")) {
+            wordSyllables--;
+        }
+
+        // Check for One Syllable Words
+        if (wordSyllables == 0) {
+            wordSyllables = 1;
+        }
+
+        // Add Syllables in Word to Total Syllable Count
+        syllableCount += wordSyllables;
     }
 
     return syllableCount;

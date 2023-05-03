@@ -16,10 +16,10 @@ To use this program, build and run the program in your C# IDE of choice. From th
 
 -   ~~Display the top 10 best rhyming words (words with the most rhyming syllables).~~
 -   ~~Create a Continue Method to allow a user to view the next 10 rhymes.~~
--   Create a 'Syllable Counter' method to display the number of syllables in a given word.
--   Create a 'Word Counter' method to count the number of words in a line.
+-   ~~Create a 'Syllable Counter' method to display the number of syllables in a given word.~~
+-   ~~Create a 'Word Counter' method to count the number of words in a line.~~
 -   Create a 'Get Poem Template' method to generate and display templates for different poem types (Sonnets, Haikus, Limerick, etc.).
--   Create a 'Define Word' method to return the definition of a given word.
+-   ~~Create a 'Define Word' method to return the definition of a given word.~~
 -   ~~Create a 'Display Pronunciation' Method to print the phonetic guide for a given word.~~
 
 ## Attributions

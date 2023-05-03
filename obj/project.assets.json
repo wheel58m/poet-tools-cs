@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "/Users/wheel58m/.nuget/packages/": {}
+    "/home/codespace/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/poet-tools-cs.csproj",
+      "projectUniqueName": "/workspaces/poet-tools-cs/poet-tools-cs.csproj",
       "projectName": "poet-tools-cs",
-      "projectPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/poet-tools-cs.csproj",
-      "packagesPath": "/Users/wheel58m/.nuget/packages/",
-      "outputPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Programming Fundamentals/final-poet-tools-cs/obj/",
+      "projectPath": "/workspaces/poet-tools-cs/poet-tools-cs.csproj",
+      "packagesPath": "/home/codespace/.nuget/packages/",
+      "outputPath": "/workspaces/poet-tools-cs/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/wheel58m/.nuget/NuGet/NuGet.Config"
+        "/home/codespace/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/dotnet/7.0.203/sdk/7.0.203/RuntimeIdentifierGraph.json"
       }
     }
   }
