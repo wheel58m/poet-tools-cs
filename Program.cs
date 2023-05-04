@@ -125,17 +125,25 @@ while (true) {
                 // Ask User for Template and Generate Poem
                 string[] poem = GeneratePoem();
 
-                // Display Poem
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine(poem);
-                Console.ResetColor();
-                Console.WriteLine();
-
-                // Prompt User to Generate Another Poem or Exit
-                if (ContinuePrompt("Would you like to generate another poem? (y/n) ", false)) {
-                    continue;
-                } else {
+                // Check for Blank Poem
+                if (poem.Length == 0) {
                     break;
+                } else {
+                    // Display Poem
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    foreach (string line in poem) {
+                        Console.WriteLine(line);
+                    }
+                    Console.ResetColor();
+                    Console.WriteLine();
+
+                    // Promt User to Save Poem or Exit
+                    if (ContinuePrompt("Would you like to save your poem? (y/n) ", false)) {
+                        SavePoem(poem);
+                    } else {
+                        break;
+                    }
                 }
             }
             break;
@@ -451,20 +459,28 @@ int SyllableCounter(string input) {
 string[] GeneratePoem() {
     bool error = false;
     string errorMessage = "";
+    string[] poem = new string[] { }; // Initialize Array to Store Poem
 
     while (true) {
         Console.Clear();
-        // Display Any Error Message ------------------------------------------/
+
+        // Display Instructions -----------------------------------------------/
+        Console.WriteLine("Please select a poem type:");
+
+        // Display Any Error Messages -----------------------------------------/
         if (error) {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(errorMessage);
             Console.ResetColor();
+            error = false;
+            errorMessage = "";
         }
-        // Display Menu & Ask for Input ---------------------------------------/
-        Console.WriteLine("Please select a poem type:");
+
+        // Display Menu Options -----------------------------------------------/
         Console.WriteLine("1. Haiku");
         Console.WriteLine("2. Limerick");
         Console.WriteLine("3. Sonnet");
+        Console.WriteLine("4. Return to Main Menu");
         Console.WriteLine();
         Console.Write("Please enter a number: ");
         ConsoleKeyInfo key = Console.ReadKey();
@@ -473,8 +489,7 @@ string[] GeneratePoem() {
         switch (key.KeyChar) {
             // Generate Haiku
             case '1':
-                // return poem = GenerateHaiku();
-                break;
+                return poem = GenerateHaiku();
             // Generate Limerick
             case '2':
                 // poem = GenerateLimerick();
@@ -483,6 +498,9 @@ string[] GeneratePoem() {
             case '3':
                 // poem = GenerateSonnet
                 break;
+            // Go Back to Main Menu
+            case '4':
+                return new string[0];
             // Invalid Input
             default:
                 error = true;
@@ -490,7 +508,62 @@ string[] GeneratePoem() {
                 break;
         }
     }
+}
 
-    string[] poem = new string[] { };
-    return poem;
+// METHOD: GENERATE HAIKU -----------------------------------------------------/
+string[] GenerateHaiku() {
+    string[] haiku = new string[3];
+    haiku[0] = SyllablePhraseGenerator(5); // Generate 5 Syllable Phrase
+    haiku[1] = SyllablePhraseGenerator(7); // Generate 7 Syllable Phrase
+    haiku[2] = SyllablePhraseGenerator(5); // Generate 5 Syllable Phrase
+    return haiku;
+}
+
+// METHOD: SYLLABLE PHRASE GENERATOR ------------------------------------------/
+string SyllablePhraseGenerator(int maxSyllables) {
+    string phrase = "";
+    int syllableCount = 0;
+
+    // Initialize Loop for Phrase Input ---------------------------------------/
+    while (syllableCount < maxSyllables) {
+        Console.Clear();
+        // Print Instructions
+        Console.WriteLine("Follow the prompts to generate a haiku.");
+        Console.Write($"Please enter {maxSyllables} syllable phrase ");
+        Console.Write($"{syllableCount}/{maxSyllables}: "); // Display Current Syllable Count
+
+        // Get User Input
+        bool completeWord = false;
+        string word = "";
+
+        // Initialize Loop for Word Input -------------------------------------/
+        while (!completeWord) {
+            ConsoleKeyInfo key = Console.ReadKey();
+
+            // Check if Word is Complete (User Pressed Space or Enter)
+            if (key.Key == ConsoleKey.Spacebar || key.Key == ConsoleKey.Enter) {
+                completeWord = true;
+            } else {
+                word += key.KeyChar;
+            }
+        }
+        syllableCount += SyllableCounter(word); // Add Syllables in Word to Total Syllable Count
+
+        // Add Word to Phrase
+        phrase += word + " ";
+    }
+
+    phrase = phrase.TrimEnd(); // Remove Trailing Space
+    return phrase;
+}
+
+// METHOD: SAVE POEM ----------------------------------------------------------/
+void SavePoem(string[] poem) {
+    Console.Clear();
+    Console.WriteLine("Please enter a file name: ");
+    string fileName = Console.ReadLine();
+
+    // Write Poem to File -----------------------------------------------------/
+    string filePath = $"poems/{fileName}.txt";
+    File.WriteAllLines(filePath, poem);
 }
