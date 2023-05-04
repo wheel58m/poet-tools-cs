@@ -1,26 +1,31 @@
-This is a C# program that provides tools to help users write poetry. The program uses the CMU Pronouncing Dictionary to identify rhyming words or load the pronunciation guide for any given word.
+# Poetry Editor
+This program provides an editor and tools for writing poetry. It allows users to create and open poems, find rhymes, lookup word definitions, count syllables, words, and more.
 
-## Issues
+## Getting Started
+Simply run the dotnet console program. You will be presented with a menu that allows you to perform various actions related to poetry.
 
--   FindRhyme Method does not display a message if the input word is not found in the dictionary.
--   FindRhyme Method does not display a message if there are no rhymes for the input word.
--   The program only finds traditional rhymes (ending sounds) but does not identify complex rhyming schemes like unconventional rhymes, internal rhymes, or phrase rhymes.
+## Menu Options
+The program's menu options are as follows:
+1. Generate Poem from Template: This option allows you to generate a poem through step by step prompts.
+2. Open Poems: This option allows you to access an existing poem file.
+3. View Tools: This option allows you to access various tools for writing poetry, such as finding rhymes and counting syllables or words.
 
-## Instructions & Usage
-To use this program, build and run the program in your C# IDE of choice. From there a menu will load, input the number corresponding to the tool you would like to use. Currently there are two tools available.
+## Available Templates
+The two available templates are:
+### Haiku
+A Haiku is a traditional form of Japanese poetry that consists of three lines. The first and third lines contain five syllables, while the second line contains seven syllables. The Haiku template generates a poem that follows this structure.
+### Limerick
+A Limerick is a humorous form of poetry that consists of five lines. The first, second, and fifth lines contain seven to ten syllables and rhyme with each other, while the third and fourth lines contain five to seven syllables and rhyme with each other. The Limerick template generates a poem that follows this structure.
 
-1.  Find Rhyming Words Tool: Allows you to enter a word and find other words with similar sound patterns.
-2.  Display Pronunciation Tool: Loads the sound pattern of a given word.
+## Tool Menu
+The Tool Menu is a sub-menu that allows access to various poetry tools. The available tools are:
+1. Find Rhyming Words
+2. Lookup a Word's Pronunciation
+3. Lookup a Word's Definition
+4. Count Syllables in a Word or Phrase
+5. Count Words in a Phrase
 
-## Future Improvements
-
--   ~~Display the top 10 best rhyming words (words with the most rhyming syllables).~~
--   ~~Create a Continue Method to allow a user to view the next 10 rhymes.~~
--   ~~Create a 'Syllable Counter' method to display the number of syllables in a given word.~~
--   ~~Create a 'Word Counter' method to count the number of words in a line.~~
--   Create a 'Get Poem Template' method to generate and display templates for different poem types (Sonnets, Haikus, Limerick, etc.).
--   ~~Create a 'Define Word' method to return the definition of a given word.~~
--   ~~Create a 'Display Pronunciation' Method to print the phonetic guide for a given word.~~
-
-## Attributions
--   CMU Pronouncing Dictionary
+## Attribution
+This program uses the following open-source files for find pronunciation and definitions:
+- CMU Pronunciation Dictionary [Visit Site](http://www.speech.cs.cmu.edu/cgi-bin/cmudict)
+- sujithps Oxford English Dictionary on GitHub [View on GitHub](https://github.com/sujithps/Dictionary/blob/master/Oxford%20English%20Dictionary.txt)
